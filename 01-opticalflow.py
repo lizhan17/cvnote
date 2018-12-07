@@ -4,6 +4,15 @@ orginal comments are removed
 
 source:
 https://docs.opencv.org/3.4/d7/d8b/tutorial_py_lucas_kanade.html
+
+
+VideoCaputre cap object
+cap.read() returns a bool (True/False). If frame is read correctly, it will be True. So you can check end of the video by checking this return value.
+
+
+
+
+
 """
 
 import numpy as np
