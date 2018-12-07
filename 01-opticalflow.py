@@ -1,7 +1,6 @@
 """
 what i added:
-comment with ## is mine
-comment with # is orginal 
+orginal comments are removed
 
 source:
 https://docs.opencv.org/3.4/d7/d8b/tutorial_py_lucas_kanade.html
@@ -9,6 +8,8 @@ https://docs.opencv.org/3.4/d7/d8b/tutorial_py_lucas_kanade.html
 
 import numpy as np
 import cv2 as cv
+
+### get a video capture object using file slow.flv
 cap = cv.VideoCapture('slow.flv')
 # params for ShiTomasi corner detection
 feature_params = dict( maxCorners = 100,
