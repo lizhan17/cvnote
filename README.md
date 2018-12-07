@@ -1,2 +1,2 @@
-# cvnote
-mainly from stanford cv lab
+# Environment
+todo
