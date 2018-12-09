@@ -29,6 +29,7 @@ feature_params = dict( maxCorners = 100,
 lk_params = dict( winSize  = (15,15),
                   maxLevel = 2,
                   criteria = (cv.TERM_CRITERIA_EPS | cv.TERM_CRITERIA_COUNT, 10, 0.03))
+##  stop the algorithm iteration if specified accuracy
 # Create some random colors
 color = np.random.randint(0,255,(100,3))
 # Take first frame and find corners in it
