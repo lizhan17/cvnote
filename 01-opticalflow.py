@@ -33,7 +33,15 @@ lk_params = dict( winSize  = (15,15),
 color = np.random.randint(0,255,(100,3))
 # Take first frame and find corners in it
 ret, old_frame = cap.read()
+
+## covert to grey color space
 old_gray = cv.cvtColor(old_frame, cv.COLOR_BGR2GRAY)
+
+## goodFeaturesToTrack 
+  ### "Determines strong corners on an image."
+  ### 
+
+
 p0 = cv.goodFeaturesToTrack(old_gray, mask = None, **feature_params)
 # Create a mask image for drawing purposes
 mask = np.zeros_like(old_frame)
