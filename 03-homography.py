@@ -12,11 +12,11 @@ from matplotlib import pyplot as plt
 
 MIN_MATCH_COUNT = 10
 
-img1 = cv2.imread('box.png',0)          # queryImage
-img2 = cv2.imread('box_in_scene.png',0) # trainImage
+img1 = cv2.imread('./data/box.png',0)          # queryImage
+img2 = cv2.imread('./data/box_in_scene.png',0) # trainImage
 
-# Initiate SIFT detector
-sift = cv2.SIFT()
+# here should not be cv2.sift. for patent 
+sift = cv2.xfeatures2d.SIFT_create()
 
 # find the keypoints and descriptors with SIFT
 kp1, des1 = sift.detectAndCompute(img1,None)
@@ -49,7 +49,7 @@ if len(good)>MIN_MATCH_COUNT:
     img2 = cv2.polylines(img2,[np.int32(dst)],True,255,3, cv2.LINE_AA)
 
 else:
-    print "Not enough matches are found - %d/%d" % (len(good),MIN_MATCH_COUNT)
+    print ("Not enough matches are found - %d/%d" %len(good),MIN_MATCH_COUNT)
     matchesMask = None
 
 draw_params = dict(matchColor = (0,255,0), # draw matches in green color

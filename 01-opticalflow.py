@@ -17,9 +17,10 @@ cap.read() returns a bool (True/False). If frame is read correctly, it will be T
 
 import numpy as np
 import cv2 as cv
+import time 
 
 ### get a video capture object using file slow.flv
-cap = cv.VideoCapture('slow.flv')
+cap = cv.VideoCapture('./data/case1-Right.mp4')
 # params for ShiTomasi corner detection
 feature_params = dict( maxCorners = 100,
                        qualityLevel = 0.3,
@@ -42,16 +43,26 @@ old_gray = cv.cvtColor(old_frame, cv.COLOR_BGR2GRAY)
   ### "Determines strong corners on an image."
   ### 
 
+start_time = time.time()
 
 p0 = cv.goodFeaturesToTrack(old_gray, mask = None, **feature_params)
+print(len(p0))
 # Create a mask image for drawing purposes
 mask = np.zeros_like(old_frame)
+frameNum = 0
+store  = []
 while(1):
+    frameNum +=1
     ret,frame = cap.read()
     frame_gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
     # calculate optical flow
+    
     p1, st, err = cv.calcOpticalFlowPyrLK(old_gray, frame_gray, p0, None, **lk_params)
+
     # Select good points
+    print("err is")
+    print(err)
+    
     good_new = p1[st==1]
     good_old = p0[st==1]
     # draw the tracks
@@ -68,5 +79,9 @@ while(1):
     # Now update the previous frame and previous points
     old_gray = frame_gray.copy()
     p0 = good_new.reshape(-1,1,2)
+    if frameNum == 398:
+        print("--- %s seconds ---" % (time.time() - start_time))
+
 cv.destroyAllWindows()
 cap.release()
+
